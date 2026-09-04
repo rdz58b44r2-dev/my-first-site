@@ -1,155 +1,1216 @@
 <!DOCTYPE html>
-<!--
-  ================================================================
-  READ THIS BEFORE YOU PASTE ANYTHING
-
-  When Gemini gives you a page, you do NOT paste it into a part of
-  this file. You replace the entire file.
-
-  Click into the editor, press Ctrl+A (Cmd+A on Mac), press Delete,
-  then paste. Everything here is meant to be thrown away.
-
-  Do that only AFTER your live link works. Get the link first.
-  ================================================================
--->
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My first site</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0d1d30;
-    --card: #142a44;
-    --line: #27466a;
-    --aqua: #6de1d7;
-    --text: #ffffff;
-    --muted: #94a9bf;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--navy);
-    color: var(--text);
-    font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    padding: 6vh 20px;
-  }
-  main { width: 100%; max-width: 640px; }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--aqua);
-    margin-bottom: 18px;
-  }
-  h1 {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 800;
-    font-size: clamp(38px, 9vw, 68px);
-    letter-spacing: -0.05em;
-    line-height: 1.02;
-    margin: 0 0 8px;
-  }
-  .name {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: clamp(18px, 4vw, 24px);
-    letter-spacing: -0.04em;
-    color: var(--aqua);
-    margin: 0 0 24px;
-  }
-  p.lead { font-size: 18px; color: var(--muted); margin: 0 0 34px; }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 26px 28px;
-    margin-bottom: 18px;
-  }
-  .card h2 {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: var(--aqua);
-    margin: 0 0 16px;
-  }
-  ol { margin: 0; padding-left: 20px; }
-  li { margin-bottom: 12px; color: var(--muted); }
-  li:last-child { margin-bottom: 0; }
-  li b { color: var(--text); font-weight: 700; }
-  code {
-    font-family: ui-monospace, "SF Mono", Consolas, monospace;
-    font-size: 0.92em;
-    background: #0a1727;
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    padding: 1px 6px;
-    color: var(--aqua);
-  }
-  a { color: var(--aqua); }
-  footer {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #6e839a;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Shinobi Monopoly</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
+    <style>
+        :root {
+            --bg-dark: #0f1117;
+            --bg-board: #1a1d26;
+            --tile-bg: #222634;
+            --tile-hover: #2d3244;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-orange: #f97316;
+            --accent-glow: #fdba74;
+            --chakra-blue: #06b6d4;
+            --ryo-gold: #eab308;
+            --border-color: #374151;
+            
+            /* Property Group Colors */
+            --c-brown: #8b4513;
+            --c-lblue: #38bdf8;
+            --c-pink: #ec4899;
+            --c-orange: #f97316;
+            --c-red: #ef4444;
+            --c-yellow: #eab308;
+            --c-green: #22c55e;
+            --c-dblue: #1e40af;
+            --c-rail: #64748b;
+            --c-util: #a855f7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1250px;
+            gap: 15px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            color: var(--accent-orange);
+            text-shadow: 0 0 12px rgba(249, 115, 22, 0.6), 2px 2px 0px #000;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--chakra-blue);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .game-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .board-container {
+            width: 750px;
+            height: 750px;
+            max-width: 95vw;
+            max-height: 95vw;
+            background-color: var(--bg-board);
+            border: 4px solid var(--accent-orange);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 0 15px rgba(249, 115, 22, 0.3);
+            display: grid;
+            grid-template-columns: repeat(11, 1fr);
+            grid-template-rows: repeat(11, 1fr);
+            position: relative;
+        }
+
+        .tile {
+            background-color: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.65rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            overflow: hidden;
+            padding: 2px;
+        }
+
+        .tile:hover {
+            background-color: var(--tile-hover);
+            z-index: 5;
+        }
+
+        .tile-color-bar {
+            width: 100%;
+            height: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+        }
+
+        .tile-name {
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 2px 0;
+            color: #fff;
+            word-break: break-word;
+        }
+
+        .tile-price {
+            font-size: 0.6rem;
+            color: var(--ryo-gold);
+            font-weight: bold;
+        }
+
+        .tile-icon {
+            font-size: 1.1rem;
+            margin: 1px 0;
+        }
+
+        /* Token Container on Tiles */
+        .tokens-container {
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+            z-index: 10;
+        }
+
+        .token {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.8), 0 0 2px #fff;
+            transition: all 0.3s ease;
+            animation: pulseToken 1.5s infinite alternate;
+        }
+
+        @keyframes pulseToken {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .token.naruto { background: radial-gradient(circle, #ff9800, #e65100); border: 1.5px solid #fff; }
+        .token.sasuke { background: radial-gradient(circle, #7e57c2, #311b92); border: 1.5px solid #fff; }
+        .token.sakura { background: radial-gradient(circle, #f48fb1, #ad1457); border: 1.5px solid #fff; }
+        .token.kakashi { background: radial-gradient(circle, #90a4ae, #263238); border: 1.5px solid #fff; }
+
+        /* Outposts/Fortresses visual indicator */
+        .buildings-container {
+            display: flex;
+            gap: 1px;
+            position: absolute;
+            top: 13px;
+        }
+        .house-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #22c55e;
+            border-radius: 1px;
+            box-shadow: 0 0 2px #000;
+        }
+        .hotel-dot {
+            width: 8px;
+            height: 6px;
+            background-color: #ef4444;
+            border-radius: 1px;
+            box-shadow: 0 0 2px #000;
+        }
+
+        .board-center {
+            grid-column: 2 / 11;
+            grid-row: 2 / 11;
+            background: radial-gradient(circle, #1e2330 0%, #111319 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .center-bg-art {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .center-title-box {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .center-title-box h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.2rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Dice Display */
+        .dice-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            z-index: 2;
+        }
+
+        .die {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(145deg, #2a2e3d, #1a1d26);
+            border: 2px solid var(--accent-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+
+        .die.rolling {
+            animation: spinDie 0.4s infinite linear;
+        }
+
+        @keyframes spinDie {
+            0% { transform: rotate(0deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1.1); }
+        }
+
+        /* Action Modal / Event Prompt Box */
+        .action-box {
+            background-color: rgba(30, 35, 48, 0.95);
+            border: 2px solid var(--chakra-blue);
+            border-radius: 8px;
+            width: 90%;
+            padding: 12px;
+            text-align: center;
+            z-index: 2;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-text {
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            line-height: 1.3;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(180deg, var(--accent-orange), #c2410c);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            transition: all 0.15s ease;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2deg);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 8px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(180deg, #4b5563, #1f2937);
+        }
+
+        .btn-blue {
+            background: linear-gradient(180deg, var(--chakra-blue), #0369a1);
+        }
+
+        .side-panel {
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-box {
+            background-color: var(--bg-board);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.3rem;
+            color: var(--accent-orange);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Player cards */
+        .players-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .player-card {
+            background-color: var(--tile-bg);
+            border-left: 4px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .player-card.active {
+            border-color: var(--accent-orange);
+            background-color: #2d3244;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-avatar {
+            font-size: 1.2rem;
+        }
+
+        .player-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .player-ryo {
+            color: var(--ryo-gold);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* Log Feed */
+        .log-box {
+            height: 180px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 4px;
+        }
+
+        .log-box::-webkit-scrollbar {
+            width: 5px;
+        }
+        .log-box::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .log-entry {
+            padding: 4px 6px;
+            border-radius: 3px;
+            background-color: rgba(255,255,255,0.03);
+            border-left: 2px solid var(--chakra-blue);
+            line-height: 1.2;
+        }
+
+        .log-entry.pay { border-color: #ef4444; }
+        .log-entry.buy { border-color: #22c55e; }
+        .log-entry.card { border-color: #a855f7; }
+
+        /* Property Details Modal / Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .property-card-modal {
+            width: 280px;
+            background-color: #1f2430;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0,0,0,0.9);
+            color: #fff;
+        }
+
+        .property-card-header {
+            padding: 12px;
+            text-align: center;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .property-card-body {
+            padding: 15px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rent-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #374151;
+            padding-bottom: 2px;
+        }
+
+        @media (max-width: 1100px) {
+            .game-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .side-panel {
+                width: 100%;
+                max-width: 750px;
+            }
+        }
+    </style>
 </head>
 <body>
-<main>
 
-  <span class="badge">Cal Poly Vibe Coding &middot; Session 01</span>
+    <div class="app-container">
+        <header>
+            <h1>NARUTO SHINOBI MONOPOLY</h1>
+            <div class="subtitle">Conquer the Ninja Realm • Rule the Great Nations</div>
+        </header>
 
-  <h1>It&rsquo;s live.</h1>
+        <div class="game-wrapper">
+            <!-- Game Board -->
+            <div class="board-container" id="board">
+                <!-- Center Dashboard Area -->
+                <div class="board-center">
+                    <svg class="center-bg-art" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#f97316" stroke-width="2"/>
+                        <polygon points="50,10 62,38 90,38 67,56 76,85 50,68 24,85 33,56 10,38 38,38" fill="none" stroke="#f97316" stroke-width="1.5"/>
+                    </svg>
 
-  <!-- Step 5: change the name below to yours, then commit. -->
-  <p class="name">Built by Tyler Mengel HERE</p>
+                    <div class="center-title-box">
+                        <h2>WILL OF FIRE</h2>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Roll dice to travel the ninja world</div>
+                    </div>
 
-  <p class="lead">
-    This page is on the internet. Anyone you send this link to can open it,
-    on any device, right now. You made that happen in about five minutes.
-  </p>
+                    <!-- Dice & Roll -->
+                    <div class="dice-area">
+                        <div class="die" id="die1">1</div>
+                        <div class="die" id="die2">1</div>
+                    </div>
 
-  <div class="card">
-    <h2>Three things, in this order</h2>
-    <ol>
-      <li><b>Put your name on it.</b> Edit <code>index.html</code>, change
-        YOUR NAME HERE above, commit, refresh this page.</li>
-      <li><b>Submit this link.</b> Go to
-        <a href="https://www.calpolyvibecoding.com/">calpolyvibecoding.com</a>,
-        make an account, and paste this URL in. That is how you get counted,
-        and how Claude seats get assigned.</li>
-      <li><b>Then build.</b> Open Gemini, get a page, and replace this entire
-        file with it.</li>
-    </ol>
-  </div>
+                    <!-- Action Prompt Box -->
+                    <div class="action-box" id="action-box">
+                        <div class="action-text" id="action-text">Welcome to Shinobi Monopoly! Choose game options or roll to begin.</div>
+                        <div class="action-btns" id="action-btns">
+                            <button class="btn" id="btn-roll" onclick="handleRollDice()">Roll Dice 🎲</button>
+                            <button class="btn btn-secondary" id="btn-end" onclick="endTurn()" disabled>End Turn ⌛</button>
+                        </div>
+                    </div>
 
-  <div class="card">
-    <h2>How to replace this page</h2>
-    <ol>
-      <li>Copy what Gemini gives you with the <b>copy button</b> on the code
-        block. Do not click and drag.</li>
-      <li>Open <code>index.html</code> here and click the pencil icon.</li>
-      <li><b>Ctrl+A</b> (<b>Cmd+A</b> on Mac), then <b>Delete</b>. All of it.
-        Yes, really.</li>
-      <li>Paste, commit, refresh.</li>
-    </ol>
-  </div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); text-align: center;">
+                        Ninja Ryo Symbol: <span style="color:var(--ryo-gold);">両</span>
+                    </div>
+                </div>
 
-  <footer>
-    Nothing on this page is precious. It exists so the link has something to
-    show before you have something of your own.
-  </footer>
+                <!-- 40 Board Tiles Generated via JS -->
+            </div>
 
-</main>
+            <!-- Side Dashboard Panel -->
+            <div class="side-panel">
+                <!-- Player Standings -->
+                <div class="card-box">
+                    <div class="section-title">
+                        <span>Shinobi Squads</span>
+                        <button class="btn btn-blue" style="font-size: 0.8rem; padding: 2px 8px;" onclick="resetGame()">New Game</button>
+                    </div>
+                    <div class="players-list" id="players-list">
+                        <!-- Player Cards injected here -->
+                    </div>
+                </div>
+
+                <!-- Management & Outposts Panel -->
+                <div class="card-box">
+                    <div class="section-title">Shinobi Base Operations</div>
+                    <div id="manage-controls" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" style="font-size: 0.85rem;" onclick="showManageOutposts()">Build Outposts 🏯</button>
+                    </div>
+                </div>
+
+                <!-- Ninja Scroll Log Feed -->
+                <div class="card-box">
+                    <div class="section-title">Ninja Scroll Log</div>
+                    <div class="log-box" id="log-box">
+                        <div class="log-entry">Scroll initialized. Ready for battle!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property Details Modal -->
+    <div class="modal-overlay" id="property-modal">
+        <div class="property-card-modal">
+            <div class="property-card-header" id="modal-header">Location Name</div>
+            <div class="property-card-body" id="modal-body">
+                <!-- Injected via JS -->
+            </div>
+            <div style="padding: 10px; text-align: center;">
+                <button class="btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* WEB AUDIO SYNTHESIZER FOR SOUND EFFECTS */
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'roll') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.exponentialRampToValueAtTime(400, now + 0.15);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.15);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            } else if (type === 'buy') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.setValueAtTime(500, now + 0.1);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } else if (type === 'pay') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.2);
+                osc.start(now);
+                osc.stop(now + 0.2);
+            } else if (type === 'chakra') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        }
+
+        const SPACES = [
+            { id: 0, name: "Konoha Gate (GO)", type: "go", text: "Collect 200 両 as Chakra Reward" },
+            { id: 1, name: "Tazuna's House", type: "property", group: "brown", price: 60, rent: [2, 10, 30, 90, 160, 250], houseCost: 50 },
+            { id: 2, name: "Scroll of Fate", type: "chance" },
+            { id: 3, name: "Great Naruto Bridge", type: "property", group: "brown", price: 60, rent: [4, 20, 60, 180, 320, 450], houseCost: 50 },
+            { id: 4, name: "Shinobi Mission Tax", type: "tax", amount: 100 },
+            { id: 5, name: "Toad: Gamabunta", type: "summon", price: 200 },
+            { id: 6, name: "Forest of Death", type: "property", group: "lblue", price: 100, rent: [6, 30, 90, 270, 400, 550], houseCost: 50 },
+            { id: 7, name: "Ninja Scroll Chest", type: "community" },
+            { id: 8, name: "Chunin Exam Tower", type: "property", group: "lblue", price: 100, rent: [6, 30, 90, 270, 400, 550], houseCost: 50 },
+            { id: 9, name: "Final Arena", type: "property", group: "lblue", price: 120, rent: [8, 40, 100, 300, 450, 600], houseCost: 50 },
+            
+            { id: 10, name: "Orochimaru's Hideout", type: "jail", text: "In Hideout / Just Visiting" },
+            { id: 11, name: "River Hideout", type: "property", group: "pink", price: 140, rent: [10, 50, 150, 450, 625, 750], houseCost: 100 },
+            { id: 12, name: "Chakra Control", type: "utility", price: 150 },
+            { id: 13, name: "Rain Village Base", type: "property", group: "pink", price: 140, rent: [10, 50, 150, 450, 625, 750], houseCost: 100 },
+            { id: 14, name: "Akatsuki HQ", type: "property", group: "pink", price: 160, rent: [12, 60, 180, 500, 700, 900], houseCost: 100 },
+            { id: 15, name: "Snake: Manda", type: "summon", price: 200 },
+            { id: 16, name: "Training Ground 7", type: "property", group: "orange", price: 180, rent: [14, 70, 200, 550, 750, 950], houseCost: 100 },
+            { id: 17, name: "Scroll of Fate", type: "chance" },
+            { id: 18, name: "Mount Myoboku", type: "property", group: "orange", price: 180, rent: [14, 70, 200, 550, 750, 950], houseCost: 100 },
+            { id: 19, name: "Valley of the End", type: "property", group: "orange", price: 200, rent: [16, 80, 220, 600, 800, 1000], houseCost: 100 },
+
+            { id: 20, name: "Ramen Ichiraku", type: "parking", text: "Rest and recover free" },
+            { id: 21, name: "Kazekage Mansion", type: "property", group: "red", price: 220, rent: [18, 90, 250, 700, 875, 1050], houseCost: 150 },
+            { id: 22, name: "Ninja Scroll Chest", type: "community" },
+            { id: 23, name: "Mizukage Estate", type: "property", group: "red", price: 220, rent: [18, 90, 250, 700, 875, 1050], houseCost: 150 },
+            { id: 24, name: "Hokage Mansion", type: "property", group: "red", price: 240, rent: [20, 100, 300, 750, 925, 1100], houseCost: 150 },
+            { id: 25, name: "Slug: Katsuyu", type: "summon", price: 200 },
+            { id: 26, name: "Hidden Sand Village", type: "property", group: "yellow", price: 260, rent: [22, 110, 330, 800, 975, 1150], houseCost: 150 },
+            { id: 27, name: "Hidden Mist Village", type: "property", group: "yellow", price: 260, rent: [22, 110, 330, 800, 975, 1150], houseCost: 150 },
+            { id: 28, name: "Senjutsu Mastery", type: "utility", price: 150 },
+            { id: 29, name: "Hidden Cloud Village", type: "property", group: "yellow", price: 280, rent: [24, 120, 360, 850, 1025, 1200], houseCost: 150 },
+
+            { id: 30, name: "Anbu Ambush!", type: "gotojail", text: "Captured! Go directly to Orochimaru's Hideout" },
+            { id: 31, name: "Shikkotsu Woods", type: "property", group: "green", price: 300, rent: [26, 130, 390, 900, 1100, 1275], houseCost: 200 },
+            { id: 32, name: "Ryuchi Cave", type: "property", group: "green", price: 300, rent: [26, 130, 390, 900, 1100, 1275], houseCost: 200 },
+            { id: 33, name: "Scroll of Fate", type: "chance" },
+            { id: 34, name: "Iron Land Citadel", type: "property", group: "green", price: 320, rent: [28, 150, 450, 1000, 1200, 1400], houseCost: 200 },
+            { id: 35, name: "Tailed Beast: Kurama", type: "summon", price: 200 },
+            { id: 36, name: "Ninja Scroll Chest", type: "community" },
+            { id: 37, name: "Kamui Dimension", type: "property", group: "dblue", price: 350, rent: [35, 175, 500, 1100, 1300, 1500], houseCost: 200 },
+            { id: 38, name: "Five Kage War Tax", type: "tax", amount: 100 },
+            { id: 39, name: "Divine Tree Peak", type: "property", group: "dblue", price: 400, rent: [50, 200, 600, 1400, 1700, 2000], houseCost: 200 }
+        ];
+
+        const CHANCE_CARDS = [
+            { text: "Shadow Clone Technique! Advance to Konoha Gate and collect 200 両.", action: player => moveDirect(player, 0, true) },
+            { text: "Anbu Black Ops Escort! Move directly to Hokage Mansion.", action: player => moveDirect(player, 24, true) },
+            { text: "Spotted by Rogue Ninja! Go to Orochimaru's Hideout.", action: player => sendToJail(player) },
+            { text: "Master Sage Mode training! Collect 150 両 bonus.", action: player => addRyo(player, 150) },
+            { text: "Explosive Tag Trap! Pay 50 両 for medical ninja restoration.", action: player => payRyo(player, 50) }
+        ];
+
+        const COMMUNITY_CARDS = [
+            { text: "Ichiraku Ramen Stamp Card Completed! Collect 100 両.", action: player => addRyo(player, 100) },
+            { text: "Successfully completed S-Rank Mission! Collect 200 両.", action: player => addRyo(player, 200) },
+            { text: "Chunine Exam Registration Fee. Pay 50 両.", action: player => payRyo(player, 50) },
+            { text: "Ninja Academy Tuition Support! Receive 50 両 from clan.", action: player => addRyo(player, 50) }
+        ];
+
+        /* Game State */
+        let players = [
+            { id: 0, name: "Naruto 🍥", className: "naruto", pos: 0, ryo: 1500, inJail: false, jailTurns: 0, isBot: false },
+            { id: 1, name: "Sasuke ⚡", className: "sasuke", pos: 0, ryo: 1500, inJail: false, jailTurns: 0, isBot: false },
+            { id: 2, name: "Sakura 🌸", className: "sakura", pos: 0, ryo: 1500, inJail: false, jailTurns: 0, isBot: true },
+            { id: 3, name: "Kakashi 👁️", className: "kakashi", pos: 0, ryo: 1500, inJail: false, jailTurns: 0, isBot: true }
+        ];
+
+        let currentPlayerIdx = 0;
+        let propertyState = {}; // spaceId -> { owner: playerId, houses: 0 }
+        let isMoving = false;
+        let hasRolled = false;
+
+        function initBoard() {
+            const boardEl = document.getElementById('board');
+            
+            // Map 40 space IDs to 11x11 Grid coordinates
+            SPACES.forEach((space, idx) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.id = `tile-${idx}`;
+                
+                // Calculate grid positions around the border
+                let row, col;
+                if (idx >= 0 && idx <= 10) {
+                    row = 11; col = 11 - idx;
+                } else if (idx >= 11 && idx <= 20) {
+                    row = 11 - (idx - 10); col = 1;
+                } else if (idx >= 21 && idx <= 30) {
+                    row = 1; col = idx - 20;
+                } else {
+                    row = idx - 30 + 1; col = 11;
+                }
+
+                tile.style.gridRow = row;
+                tile.style.gridColumn = col;
+                tile.onclick = () => showPropertyDetails(idx);
+
+                // Build Tile UI
+                let contentHTML = '';
+                if (space.group) {
+                    contentHTML += `<div class="tile-color-bar" style="background-color: var(--c-${space.group});"></div>`;
+                }
+
+                let icon = '📍';
+                if (space.type === 'go') icon = '🍥';
+                else if (space.type === 'chance') icon = '📜';
+                else if (space.type === 'community') icon = '🧰';
+                else if (space.type === 'tax') icon = '💰';
+                else if (space.type === 'summon') icon = '🌀';
+                else if (space.type === 'jail') icon = '🐍';
+                else if (space.type === 'parking') icon = '🍜';
+                else if (space.type === 'gotojail') icon = '⚡';
+
+                contentHTML += `
+                    <div class="buildings-container" id="buildings-${idx}"></div>
+                    <div class="tile-name">${space.name}</div>
+                    <div class="tile-icon">${icon}</div>
+                    ${space.price ? `<div class="tile-price">${space.price} 両</div>` : ''}
+                    <div class="tokens-container" id="tokens-${idx}"></div>
+                `;
+
+                tile.innerHTML = contentHTML;
+                boardEl.appendChild(tile);
+            });
+
+            renderPlayers();
+            renderPlayerList();
+            logMessage("Board initialized. Naruto's turn!", "info");
+        }
+
+        function renderPlayers() {
+            // Clear existing tokens
+            for (let i = 0; i < 40; i++) {
+                const tokContainer = document.getElementById(`tokens-${i}`);
+                if (tokContainer) tokContainer.innerHTML = '';
+            }
+
+            // Render current player positions
+            players.forEach(p => {
+                if (p.ryo < 0) return; // Bankrupt
+                const tokContainer = document.getElementById(`tokens-${p.pos}`);
+                if (tokContainer) {
+                    const token = document.createElement('div');
+                    token.className = `token ${p.className}`;
+                    token.title = p.name;
+                    token.innerText = p.name.split(' ')[0][0];
+                    tokContainer.appendChild(token);
+                }
+            });
+        }
+
+        function renderPlayerList() {
+            const listEl = document.getElementById('players-list');
+            listEl.innerHTML = '';
+
+            players.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = `player-card ${idx === currentPlayerIdx ? 'active' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="player-info">
+                        <span class="player-avatar">${p.name.split(' ')[1] || '👤'}</span>
+                        <div>
+                            <div class="player-name">${p.name} ${p.isBot ? '🤖' : ''}</div>
+                            <div style="font-size:0.7rem; color: var(--text-muted);">${p.inJail ? 'In Hideout' : 'Active'}</div>
+                        </div>
+                    </div>
+                    <div class="player-ryo">${p.ryo} 両</div>
+                `;
+                listEl.appendChild(card);
+            });
+        }
+
+        function logMessage(msg, type = 'info') {
+            const logBox = document.getElementById('log-box');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.innerText = msg;
+            logBox.appendChild(entry);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        function handleRollDice() {
+            if (isMoving || hasRolled) return;
+
+            const curPlayer = players[currentPlayerIdx];
+            
+            if (curPlayer.inJail) {
+                logMessage(`${curPlayer.name} is trapped in Orochimaru's Hideout! Pay 50 両 or wait turn.`, "pay");
+                if (curPlayer.ryo >= 50) {
+                    curPlayer.ryo -= 50;
+                    curPlayer.inJail = false;
+                    logMessage(`${curPlayer.name} paid 50 両 to escape Hideout!`, "buy");
+                    renderPlayerList();
+                } else {
+                    logMessage(`${curPlayer.name} couldn't pay escape fee. Turn skipped!`, "pay");
+                    endTurn();
+                    return;
+                }
+            }
+
+            isMoving = true;
+            playSound('roll');
+
+            const die1El = document.getElementById('die1');
+            const die2El = document.getElementById('die2');
+            die1El.classList.add('rolling');
+            die2El.classList.add('rolling');
+
+            setTimeout(() => {
+                const d1 = Math.floor(Math.random() * 6) + 1;
+                const d2 = Math.floor(Math.random() * 6) + 1;
+                const totalRoll = d1 + d2;
+
+                die1El.classList.remove('rolling');
+                die2El.classList.remove('rolling');
+                die1El.innerText = d1;
+                die2El.innerText = d2;
+
+                hasRolled = true;
+                document.getElementById('btn-roll').disabled = true;
+
+                logMessage(`${curPlayer.name} rolled ${d1} + ${d2} = ${totalRoll}`);
+                movePlayerSteps(curPlayer, totalRoll);
+            }, 500);
+        }
+
+        function movePlayerSteps(player, steps) {
+            let remaining = steps;
+
+            function step() {
+                if (remaining <= 0) {
+                    isMoving = false;
+                    handleTileLanding(player, player.pos);
+                    return;
+                }
+
+                player.pos = (player.pos + 1) % 40;
+                
+                // Collect GO reward
+                if (player.pos === 0) {
+                    player.ryo += 200;
+                    playSound('chakra');
+                    logMessage(`${player.name} passed Konoha Gate! Collected 200 両 Chakra bonus.`, "buy");
+                    renderPlayerList();
+                }
+
+                renderPlayers();
+                playSound('roll');
+                remaining--;
+                setTimeout(step, 180);
+            }
+
+            step();
+        }
+
+        function handleTileLanding(player, tileIdx) {
+            const space = SPACES[tileIdx];
+            const actionText = document.getElementById('action-text');
+            const actionBtns = document.getElementById('action-btns');
+
+            renderPlayerList();
+
+            // Default button state
+            actionBtns.innerHTML = `
+                <button class="btn btn-secondary" id="btn-end" onclick="endTurn()">End Turn ⌛</button>
+            `;
+
+            // Process based on space type
+            if (space.type === 'property' || space.type === 'summon' || space.type === 'utility') {
+                const prop = propertyState[tileIdx];
+
+                if (!prop) {
+                    // Unowned
+                    actionText.innerHTML = `${player.name} landed on <strong>${space.name}</strong>.<br>Would you like to buy it for <strong>${space.price} 両</strong>?`;
+                    
+                    const buyBtn = document.createElement('button');
+                    buyBtn.className = 'btn';
+                    buyBtn.innerText = `Buy for ${space.price} 両 📜`;
+                    buyBtn.onclick = () => buyProperty(player, tileIdx);
+                    
+                    if (player.ryo < space.price) buyBtn.disabled = true;
+                    
+                    actionBtns.prepend(buyBtn);
+
+                    // Bot Decision
+                    if (player.isBot && player.ryo >= space.price) {
+                        setTimeout(() => buyProperty(player, tileIdx), 600);
+                    }
+                } else if (prop.owner !== player.id) {
+                    // Pay Rent
+                    const owner = players[prop.owner];
+                    let rentAmount = calculateRent(tileIdx);
+
+                    actionText.innerHTML = `${player.name} landed on <strong>${space.name}</strong> owned by ${owner.name}!<br>Pay Rent: <strong style="color:#ef4444">${rentAmount} 両</strong>`;
+                    
+                    player.ryo -= rentAmount;
+                    owner.ryo += rentAmount;
+                    playSound('pay');
+                    logMessage(`${player.name} paid ${rentAmount} 両 rent to ${owner.name}.`, "pay");
+                    renderPlayerList();
+
+                    checkBankruptcy(player);
+                } else {
+                    actionText.innerHTML = `${player.name} visited their own territory: <strong>${space.name}</strong>.`;
+                }
+            } else if (space.type === 'tax') {
+                actionText.innerHTML = `${player.name} was taxed by Shinobi Alliance! Pay <strong>${space.amount} 両</strong>.`;
+                player.ryo -= space.amount;
+                playSound('pay');
+                logMessage(`${player.name} paid ${space.amount} 両 War Tax.`, "pay");
+                renderPlayerList();
+                checkBankruptcy(player);
+            } else if (space.type === 'gotojail') {
+                actionText.innerHTML = `OH NO! ${player.name} got ambushed by Anbu! Off to Orochimaru's Hideout.`;
+                sendToJail(player);
+            } else if (space.type === 'chance') {
+                const card = CHANCE_CARDS[Math.floor(Math.random() * CHANCE_CARDS.length)];
+                actionText.innerHTML = `<strong>Scroll of Fate:</strong> ${card.text}`;
+                logMessage(`${player.name} drew Scroll: ${card.text}`, "card");
+                card.action(player);
+            } else if (space.type === 'community') {
+                const card = COMMUNITY_CARDS[Math.floor(Math.random() * COMMUNITY_CARDS.length)];
+                actionText.innerHTML = `<strong>Ninja Mission Scroll:</strong> ${card.text}`;
+                logMessage(`${player.name} drew Mission: ${card.text}`, "card");
+                card.action(player);
+            } else {
+                actionText.innerHTML = `${player.name} landed on <strong>${space.name}</strong>. ${space.text || ''}`;
+            }
+
+            // If bot turn, automatically pass after delay
+            if (player.isBot && !isMoving) {
+                setTimeout(endTurn, 1200);
+            }
+        }
+
+        function buyProperty(player, tileIdx) {
+            const space = SPACES[tileIdx];
+            if (player.ryo >= space.price && !propertyState[tileIdx]) {
+                player.ryo -= space.price;
+                propertyState[tileIdx] = { owner: player.id, houses: 0 };
+                
+                playSound('buy');
+                logMessage(`${player.name} purchased ${space.name} for ${space.price} 両!`, "buy");
+                
+                // Color highlight on tile border
+                const tileEl = document.getElementById(`tile-${tileIdx}`);
+                tileEl.style.boxShadow = `inset 0 0 8px ${player.className === 'naruto' ? '#f97316' : player.className === 'sasuke' ? '#a855f7' : player.className === 'sakura' ? '#ec4899' : '#64748b'}`;
+
+                renderPlayerList();
+                
+                document.getElementById('action-text').innerHTML = `${player.name} now owns <strong>${space.name}</strong>!`;
+                document.getElementById('action-btns').innerHTML = `
+                    <button class="btn btn-secondary" id="btn-end" onclick="endTurn()">End Turn ⌛</button>
+                `;
+            }
+        }
+
+        function calculateRent(tileIdx) {
+            const space = SPACES[tileIdx];
+            const prop = propertyState[tileIdx];
+
+            if (space.type === 'summon') {
+                // Count how many summons owner has
+                let count = 0;
+                [5, 15, 25, 35].forEach(id => {
+                    if (propertyState[id] && propertyState[id].owner === prop.owner) count++;
+                });
+                return 25 * Math.pow(2, count - 1);
+            }
+
+            if (space.type === 'utility') {
+                return 50;
+            }
+
+            if (space.rent) {
+                return space.rent[prop.houses];
+            }
+
+            return 10;
+        }
+
+        function sendToJail(player) {
+            player.pos = 10;
+            player.inJail = true;
+            renderPlayers();
+            playSound('pay');
+            logMessage(`${player.name} sent to Orochimaru's Hideout!`, "pay");
+        }
+
+        function moveDirect(player, targetIdx, collectGo = true) {
+            if (collectGo && targetIdx < player.pos) {
+                player.ryo += 200;
+                logMessage(`${player.name} passed GO while traveling! +200 両.`, "buy");
+            }
+            player.pos = targetIdx;
+            renderPlayers();
+            handleTileLanding(player, targetIdx);
+        }
+
+        function addRyo(player, amt) {
+            player.ryo += amt;
+            playSound('buy');
+            renderPlayerList();
+        }
+
+        function payRyo(player, amt) {
+            player.ryo -= amt;
+            playSound('pay');
+            renderPlayerList();
+            checkBankruptcy(player);
+        }
+
+        function checkBankruptcy(player) {
+            if (player.ryo < 0) {
+                logMessage(`${player.name} HAS RUN OUT OF CHAKRA & RYO! BANKRUPT! 💀`, "pay");
+                // Free owned properties
+                Object.keys(propertyState).forEach(id => {
+                    if (propertyState[id].owner === player.id) {
+                        delete propertyState[id];
+                        const tileEl = document.getElementById(`tile-${id}`);
+                        tileEl.style.boxShadow = 'none';
+                    }
+                });
+                renderPlayers();
+                renderPlayerList();
+            }
+        }
+
+        function showManageOutposts() {
+            const curPlayer = players[currentPlayerIdx];
+            const ownedProps = Object.keys(propertyState).filter(id => propertyState[id].owner === curPlayer.id && SPACES[id].houseCost);
+
+            if (ownedProps.length === 0) {
+                alert("You don't own any developable Ninja territories yet!");
+                return;
+            }
+
+            let promptMsg = "Select a space to build Outpost:\n";
+            ownedProps.forEach(id => {
+                const s = SPACES[id];
+                const h = propertyState[id].houses;
+                promptMsg += `Tile ${id}: ${s.name} (${h} Outposts, Cost: ${s.houseCost} 両)\n`;
+            });
+
+            const choice = prompt(promptMsg + "\nEnter Tile ID number to build:");
+            if (choice && propertyState[choice] && propertyState[choice].owner === curPlayer.id) {
+                const space = SPACES[choice];
+                if (curPlayer.ryo >= space.houseCost && propertyState[choice].houses < 5) {
+                    curPlayer.ryo -= space.houseCost;
+                    propertyState[choice].houses++;
+                    playSound('buy');
+                    logMessage(`${curPlayer.name} built an Outpost on ${space.name}!`, "buy");
+
+                    // Render Outpost dot
+                    const bContainer = document.getElementById(`buildings-${choice}`);
+                    if (bContainer) {
+                        const dot = document.createElement('div');
+                        dot.className = propertyState[choice].houses === 5 ? 'hotel-dot' : 'house-dot';
+                        bContainer.appendChild(dot);
+                    }
+
+                    renderPlayerList();
+                } else {
+                    alert("Not enough Ryo or max outposts reached!");
+                }
+            }
+        }
+
+        function endTurn() {
+            hasRolled = false;
+            
+            // Advance to next active player
+            do {
+                currentPlayerIdx = (currentPlayerIdx + 1) % players.length;
+            } while (players[currentPlayerIdx].ryo < 0);
+
+            const nextPlayer = players[currentPlayerIdx];
+            
+            renderPlayerList();
+            document.getElementById('btn-roll').disabled = false;
+            
+            document.getElementById('action-text').innerHTML = `It is now <strong>${nextPlayer.name}'s</strong> turn. Roll dice to continue.`;
+            document.getElementById('action-btns').innerHTML = `
+                <button class="btn" id="btn-roll" onclick="handleRollDice()">Roll Dice 🎲</button>
+                <button class="btn btn-secondary" id="btn-end" onclick="endTurn()" disabled>End Turn ⌛</button>
+            `;
+
+            logMessage(`--- Turn: ${nextPlayer.name} ---`);
+
+            // Automated Bot Roll
+            if (nextPlayer.isBot) {
+                document.getElementById('btn-roll').disabled = true;
+                setTimeout(handleRollDice, 1000);
+            }
+        }
+
+        function showPropertyDetails(tileIdx) {
+            const space = SPACES[tileIdx];
+            const modal = document.getElementById('property-modal');
+            const header = document.getElementById('modal-header');
+            const body = document.getElementById('modal-body');
+
+            header.innerText = space.name;
+            header.style.backgroundColor = space.group ? `var(--c-${space.group})` : '#374151';
+
+            let propInfo = propertyState[tileIdx];
+            let ownerName = propInfo ? players[propInfo.owner].name : "Unowned";
+
+            let html = `
+                <div><strong>Owner:</strong> ${ownerName}</div>
+                <div><strong>Type:</strong> ${space.type.toUpperCase()}</div>
+            `;
+
+            if (space.price) html += `<div><strong>Purchase Cost:</strong> ${space.price} 両</div>`;
+            if (space.houseCost) html += `<div><strong>Outpost Cost:</strong> ${space.houseCost} 両</div>`;
+
+            if (space.rent) {
+                html += `<div style="margin-top:8px; font-weight:bold;">Rent Rates:</div>`;
+                html += `<div class="rent-row"><span>Base Rent:</span><span>${space.rent[0]} 両</span></div>`;
+                html += `<div class="rent-row"><span>1 Outpost:</span><span>${space.rent[1]} 両</span></div>`;
+                html += `<div class="rent-row"><span>2 Outposts:</span><span>${space.rent[2]} 両</span></div>`;
+                html += `<div class="rent-row"><span>3 Outposts:</span><span>${space.rent[3]} 両</span></div>`;
+                html += `<div class="rent-row"><span>4 Outposts:</span><span>${space.rent[4]} 両</span></div>`;
+                html += `<div class="rent-row"><span>Fortress (Hotel):</span><span>${space.rent[5]} 両</span></div>`;
+            }
+
+            body.innerHTML = html;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('property-modal').classList.remove('active');
+        }
+
+        function resetGame() {
+            if (confirm("Reset game scroll and start new Ninja Monopoly match?")) {
+                location.reload();
+            }
+        }
+
+        // Initialize on load
+        window.onload = () => {
+            initBoard();
+        };
+    </script>
 </body>
 </html>
